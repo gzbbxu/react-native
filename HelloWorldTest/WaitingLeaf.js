@@ -10,7 +10,7 @@ export default class WaitingLeaf extends Component{
         return(
             <View style={styles.container}>
                     <Text style={styles.textPromptStyle}>
-                        登陆使用的手机号:{this.props.phoneNumber}
+                        登陆使用的 d手机号:{this.props.phoneNumber}
                     </Text>
                     <Text style={styles.textPromptStyle}>
                         登陆使用的密码:{this.props.userPW}

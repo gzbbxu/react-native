@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import{
-  AppRegistry,StyleSheet,Text,View,Dimensions,TextInput
+  AppRegistry,StyleSheet,Text,View,Dimensions,TextInput,Alert,NativeModules
 }from 'react-native';
 
 let widthOfMargin = Dimensions.get("window").width*0.05;
@@ -13,6 +13,7 @@ export default class LoginLeaf extends React.Component{
           inputPwd:''
         };
         this.updatePw=this.updatePw.bind(this);
+        this.jumpoWaiting =this.jumpoWaiting.bind(this);
    }
   updatePw(newText){
     this.setState(()=>{
@@ -32,7 +33,20 @@ export default class LoginLeaf extends React.Component{
     );
   }
   userPressConfirm(){
-    this.props.navigator.push(
+ 
+    Alert.alert('提示','确定使用'+this.state.inputNum+'号码登陆吗?',[{
+        text:'取消',onPress:(()=>{}),style:'cancel'
+    },{
+        text:'确定',onPress:this.jumpoWaiting
+    }]);
+  }
+  userPressAddressBook(){
+    var {NaiveModules} = require('react-native');
+    let ExampleInterface = NativeModules.ExampleInterface;
+    NativeModules.ExampleInterface.HandleMessage('testMessage');
+  }
+  jumpoWaiting(){
+   this.props.navigator.push(
       {
         phoneNumber:this.state.inputNum,
         userPW:this.state.inputPwd,
@@ -61,6 +75,10 @@ export default class LoginLeaf extends React.Component{
         <Text style={styles.bigTextPrompt}
               onPress={()=>this.userPressConfirm()}>
           确定
+        </Text>
+        <Text style={styles.bigTextPrompt}
+              onPress={()=>this.userPressAddressBook()}>
+          原生通信
         </Text>
       </View>
     );

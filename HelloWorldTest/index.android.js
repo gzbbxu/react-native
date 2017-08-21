@@ -13,8 +13,7 @@ export default class NaviModule extends Component{
       this.handleBackAndroid=this.handleBackAndroid.bind(this);
   }
   configureScene(route){
-      return Navigator.SceneConfigs.FadeAndroid;
-    //return Navigator.SceneConfigs.VerticalDownSwipeJump;
+      return Navigator.SceneConfigs.FadeAndroid; 
   }
   renderScene(router,navigator){
     this.navigator = navigator;
