@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import{
-  AppRegistry,StyleSheet,Text,View,Dimensions,TextInput,Alert,NativeModules
+  AppRegistry,StyleSheet,Text,View,Dimensions,TextInput,Alert,NativeModules,DeviceEventEmitter
 }from 'react-native';
 
 let widthOfMargin = Dimensions.get("window").width*0.05;
@@ -10,7 +10,8 @@ export default class LoginLeaf extends React.Component{
       super(props);
       this.state = {
           inputNum:'',
-          inputPwd:''
+          inputPwd:'',
+          otherMsg:''
         };
         this.updatePw=this.updatePw.bind(this);
         this.jumpoWaiting =this.jumpoWaiting.bind(this);
@@ -41,9 +42,18 @@ export default class LoginLeaf extends React.Component{
     }]);
   }
   userPressAddressBook(){
+    DeviceEventEmitter.addListener('AndroidToRNMessage',this.handleAndridMessage.bind(this));
     var {NaiveModules} = require('react-native');
     let ExampleInterface = NativeModules.ExampleInterface;
     NativeModules.ExampleInterface.HandleMessage('testMessage');
+  }
+  handleAndridMessage(aMessage){
+      console.log('handleAndridMessage:'+aMessage);
+      this.setState(()=>{
+        return{
+          otherMsg:aMessage,
+        };
+      });
   }
   jumpoWaiting(){
    this.props.navigator.push(
@@ -79,6 +89,9 @@ export default class LoginLeaf extends React.Component{
         <Text style={styles.bigTextPrompt}
               onPress={()=>this.userPressAddressBook()}>
           原生通信
+        </Text>
+        <Text style={styles.textPromptStyle}>
+          原生通信返回的信息:{this.state.otherMsg}
         </Text>
       </View>
     );
