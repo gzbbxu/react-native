@@ -42,10 +42,29 @@ export default class LoginLeaf extends React.Component{
     }]);
   }
   userPressAddressBook(){
-    DeviceEventEmitter.addListener('AndroidToRNMessage',this.handleAndridMessage.bind(this));
+    // 回掉函数
+    /*DeviceEventEmitter.addListener('AndroidToRNMessage',this.handleAndridMessage.bind(this));
     var {NaiveModules} = require('react-native');
     let ExampleInterface = NativeModules.ExampleInterface;
-    NativeModules.ExampleInterface.HandleMessage('testMessage');
+    NativeModules.ExampleInterface.HandleMessage('testMessage');*/
+    var {NaiveModules} = require('react-native');
+    let ExampleInterface = NativeModules.ExampleInterface;
+    NativeModules.ExampleInterface.HandleMessage('testMessage').then(
+        (reult)=>{
+            console.log('ok');
+            this.setState(()=>{
+              return{
+                otherMsg:reult,
+              };
+            });
+        }
+    ).catch(
+      (error)=>{
+        console.log(error);//打印异常信息
+        console.log(error.message);//打印android 异常信息
+        console.log(error.code);//打印自己提供的异常
+      }
+    );
   }
   handleAndridMessage(aMessage){
       console.log('handleAndridMessage:'+aMessage);
