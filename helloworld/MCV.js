@@ -81,7 +81,10 @@ let MCV = StyleSheet.create({
     },
     secondRow: {           //阅读日记界面用来展示心情图片、日记标题、日记时间的View
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor:'gray',
+        borderRadius:4,
+        margin:1
     },    
     titleInputStyle: {      //写日记界面用来输入日记标题的TextInput组件样式
         fontSize: textSize,
