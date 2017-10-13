@@ -15,6 +15,7 @@ export default class DiaryList extends Component{
         //     diaryTitle:'读取中...',
         //     diaryBody:'读取中...',
         //   };
+        console.log("DiaryList constructor");
         this.state= {
             diaryListDataSource:new ListView.DataSource(
                 {
@@ -41,7 +42,7 @@ export default class DiaryList extends Component{
     }
     renderListItem(log,sectionID,rowID){
         return(
-            <TouchableOpacity onPress={()=>this.props.selectLististItem(rowID)}>
+            <TouchableOpacity onPress={()=>this.props.selectlististItem(rowID)}>
                 <View style={MCV.secondRow}>
                     
                     <Image style={MCV.moodStyle} source={log.mood}/>

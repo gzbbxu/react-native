@@ -104,6 +104,76 @@ let MCV = StyleSheet.create({
         paddingTop: 0,        //如果不设置，在Android平台TextInput组件内输入显示异常
         paddingBottom: 0,     //如果不设置，在Android平台TextInput组件内输入显示异常        
         fontSize: 14,
+    },
+    item:{
+      
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'center',
+        backgroundColor:'gray',
+        height:totalHeight*0.4
+    },
+    list_item:{
+        flexDirection:'column',
+        justifyContent:'flex-end',
+        width:totalWidth*0.4,
+    },
+    item_element:{
+        alignSelf : 'flex-end',
+    },
+    scrollview:{
+        height:totalHeight*0.4,
+        width:totalWidth*2
+    },
+    midScrollView:{
+        backgroundColor:'red',
+      
+    },
+    myViewRoot:{
+        top:2,      	
+        flex: 1,   
+        backgroundColor: 'gray',
+        width:totalWidth*4,
+        height:totalHeight*0.6,
+    },
+    image:{
+        width: 70, 
+        height: 82,
+        margin:10,
+
+    },
+    backgroundimg:{
+        width:1920,
+        height:totalHeight*0.6,
+    },
+    myview:{
+        margin:10,
+        height:130,
+        width:90,
+    },
+    topView_firstRow: {  
+        top:20,         		//firstRow用来定义屏幕最上方显示按钮的View
+        height:100,    
+        flexDirection: 'row',
+        width:totalWidth - 4,           	// margin设置为2，两边加起来就是4，所以宽度要减4
+        justifyContent: 'center',	//使用这个键值，可以看到这一行里的三个按钮不论
+        margin:2                          	//屏幕宽度是多少都会乖乖地排列好，感觉还是很省心的
+    },
+    topView_Column:{
+        height:50,
+        flexDirection:'column',
+        width:40,
+        margin:10,
+        justifyContent: 'center',
+        alignItems:'center',
+    },
+    jinzhu:{
+        flexDirection:'row',
+    },
+    topView_nickName:{
+        marginTop:20,
+        justifyContent:'center'
     }
+
 });
 export { MCV as default };

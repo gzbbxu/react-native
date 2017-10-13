@@ -14,11 +14,16 @@ export default class DiaryWriter extends Component{
         };
         this.returnPressed=this.returnPressed.bind(this);
         this.selectMood = this.selectMood.bind(this);
+    }
 
-    }
     returnPressed(){
-        Alert('请确认','你确定要退回日记吗？',[{text:'确定',onPress:this.props.returnPress},{text:'取消'}]);
+        Alert.alert('请确认','你确定要退回日记吗？',
+        [
+            {text:'确定',onPress: this.props.returnPressed},
+            {text:'取消'}
+        ]);
     }
+
     selectMood(){
         let tempString;
         if(this.moodCode===5){

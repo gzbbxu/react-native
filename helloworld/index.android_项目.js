@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 
 import { Loop, Stage } from 'react-game-kit';
-import HorList from './myScroll_relative';
-import TopView from './topView';
-export default class helloworld extends Component {
+// import HorList from './myHorList';
+//import HorList from './myplatlist';
+import HorList from './myScroll.js';
 
+export default class helloworld extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -21,21 +22,14 @@ export default class helloworld extends Component {
     this.showList=this.showList.bind(this);
   }
     render(){
-      return this.showList();
+     return this.showList();
     }
     showList(){
         return(
-          <View>
-            <TopView/>
-            <HorList
-              listArray={this.state.dataArray}
-            />
-          </View>
-         
+          <HorList
+            listArray={this.state.dataArray}
+          />
         );
-    }
-    showTop(){
-
     }
 }
 

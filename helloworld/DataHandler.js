@@ -50,10 +50,14 @@ export default class DataHandler{
                         }
                         AsyncStorage.multiGet(keys).then(
                             (results)=>{
-                                let resultsLength = results;
+                              
+                                let resultsLength = results.length;
+                              
                                 for(let counter=0;counter<resultsLength;counter++){
+                                    console.log("result 1= "+results[counter][1]);
                                     DataHandler.realDairyList[counter]=JSON.parse(results[counter][1]);
-                                    switch(DataHandler.realDairyList[resultsLength].mood){
+                                  
+                                    switch(DataHandler.realDairyList[counter].mood){
                                         case 2:
                                             DataHandler.realDairyList[counter].mood = angryMood;
                                             break; 
@@ -70,47 +74,50 @@ export default class DataHandler{
                                             DataHandler.realDairyList[counter].mood = peaceMood;
                                     }
                                     let atime = new Date(DataHandler.realDairyList[counter].time);
-                                }
+                                    DataHandler.realDairyList[counter].time=''+atime.getFullYear()+'年'+(atime.getMonth()+1)+'月'+atime.getDate()+'日 星期'+(atime.getDay()+1)+' '+atime.getHours()+':'+atime.getMinutes();
+                                }//for 
                                 DataHandler.bubleSortDiaryList();//排序
-                                if(resultsLength>0){//日记列表有数据,取出最后一条数据
-                                    resultsLength--;
-                                    DataHandler.listIndex = resultsLength;
-                                    let newMoodIcon;
-                                    switch(DataHandler.realDairyList[resultsLength].mood){
-                                        case 2:
-                                            newMoodIcon = angryMood;
-                                        break;
-                                        case 3:
-                                            newMoodIcon = sadMood;
-                                        break;
-                                        case 4:
-                                            newMoodIcon = happyMood;
-                                        break;
-                                        case 5:
-                                            newMoodIcon = miseryMood;
-                                        break;
-                                        default:
-                                            newMoodIcon = peaceMood;
-                                    }
-                                    let newTitle =DataHandler.realDairyList[resultsLength].title;
-                                    let newBody = DataHandler.realDairyList[resultsLength].body;
-                                    let ctime = new Date(DataHandler.realDairyList[resultsLength].time);
-                                    let timeString = ''+ctime.getFullYear()+'年 '+ctime.getHours()+':'+ctime.getMinutes();
-                                    let rValue = {
-                                        diaryMood :newMoodIcon,
-                                        diaryTime:timeString,
-                                        diaryTitile:newTitle,
-                                        diaryBody:newBody
-                                    };
-                                    resolve(rValue);
-                                }else{
-                                    let returnValue={
-                                        diaryTime:'没有历史日记',
-                                        diaryTitile:'没有历史日记',
-                                        diaryBody:''
-                                    };
-                                    resolve(returnValue);
-                                }
+                                resolve(DataHandler.realDairyList);
+                                console.log("get all success ");
+                                // if(resultsLength>0){//日记列表有数据,取出最后一条数据
+                                //     resultsLength--;
+                                //     DataHandler.listIndex = resultsLength;
+                                //     let newMoodIcon;
+                                //     switch(DataHandler.realDairyList[resultsLength].mood){
+                                //         case 2:
+                                //             newMoodIcon = angryMood;
+                                //         break;
+                                //         case 3:
+                                //             newMoodIcon = sadMood;
+                                //         break;
+                                //         case 4:
+                                //             newMoodIcon = happyMood;
+                                //         break;
+                                //         case 5:
+                                //             newMoodIcon = miseryMood;
+                                //         break;
+                                //         default:
+                                //             newMoodIcon = peaceMood;
+                                //     }
+                                //     let newTitle =DataHandler.realDairyList[resultsLength].title;
+                                //     let newBody = DataHandler.realDairyList[resultsLength].body;
+                                //     let ctime = new Date(DataHandler.realDairyList[resultsLength].time);
+                                //     let timeString = ''+ctime.getFullYear()+'年 '+ctime.getHours()+':'+ctime.getMinutes();
+                                //     let rValue = {
+                                //         diaryMood :newMoodIcon,
+                                //         diaryTime:timeString,
+                                //         diaryTitile:newTitle,
+                                //         diaryBody:newBody
+                                //     };
+                                //     resolve(rValue);
+                                // }else{
+                                //     let returnValue={
+                                //         diaryTime:'没有历史日记',
+                                //         diaryTitile:'没有历史日记',
+                                //         diaryBody:''
+                                //     };
+                                //     resolve(returnValue);
+                                // }
                             }
                         ).catch(
                             (error)=>{
@@ -214,7 +221,7 @@ export default class DataHandler{
             aDiary.time = currentTime;
             aDiary.sectionID = ''+currentTime.getFullYear()+' 年 '+(currentTime.getMonth()+1) + '月';
             //sectionID 用来对日记列表进行分段显示
-            aDiary.index = Data.parse(currentTime);
+            aDiary.index = Date.parse(currentTime);
             //从当前时间生成唯一值，用来索引日记列表，这个值精确到毫秒，可以认为他是唯一的。
             AsyncStorage.setItem(''+aDiary.index,JSON.stringify(aDiary)).then(
                 ()=>{
@@ -246,6 +253,7 @@ export default class DataHandler{
                         diayBody:newDiaryBody
                     };
                     resolve(aValue);
+                    console.log("save success");
                 }
             ).catch(
                 (error)=>{
