@@ -1,0 +1,10 @@
+syntax = "proto2";  
+option optimize_for=LITE_RUNTIME;
+import "MessageType.proto";  
+message DeleteDeg2FriendRS
+{
+    optional MessageType.ErrorInfo err_info = 1;    // error code.
+    required uint64 user_id = 2; // 请求的用户ID
+    required uint64 peer_id = 3; // 请求删除的二度好友ID
+}
+ 

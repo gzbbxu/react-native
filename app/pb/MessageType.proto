@@ -1,0 +1,30 @@
+// See README.txt for information and build instructions.
+syntax = "proto2";  
+package MessageType;
+option optimize_for=LITE_RUNTIME;
+import "RichTextDef.proto";
+
+message ErrorInfo{
+    optional int64 err_code = 1 [default = 2147483648];
+    optional bytes err_msg = 2;
+    optional RichTextDef.RichTextBlock err_msg_rich = 3;
+}
+
+message IdInfo {
+	optional bytes content = 1;
+	repeated RichInfo extra = 2;
+}
+
+message RichInfo {
+	required int32 begin = 1;
+	required int32 end = 2;
+	optional int32 tag = 3;
+	optional int32 tag_id = 4;
+	optional bytes tag_extra = 5;
+}
+
+message TipsMsgId {
+    required int32 tipsType = 1;
+    optional int64 placeId = 2;
+    optional bytes tipContent = 3;
+}

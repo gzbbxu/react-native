@@ -1,0 +1,6 @@
+syntax = "proto2";  
+
+message QueryFriendsChestCountRQ
+{
+    required uint64 user_id =1; // 请求者ID
+}

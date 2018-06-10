@@ -1,0 +1,70 @@
+syntax = "proto2";  
+option optimize_for=LITE_RUNTIME;
+package RichTextDef;
+
+enum RichTextElementType
+{
+    ENUM_RTF_ELEMENT_TYPE_TEXT       = 0; //文字
+    ENUM_RTF_ELEMENT_TYPE_AVATAR     = 1; //头像
+    ENUM_RTF_ELEMENT_TYPE_ICON       = 2; //图标
+    ENUM_RTF_ELEMENT_TYPE_NEW_LINE   = 3; //换行
+}
+
+enum RichTextFormatTemplate
+{
+    ENUM_RTF_TEMPLATE_TYPE_NONE   = 0; //文字
+    ENUM_RTF_TEMPLATE_TYPE_NICKNAME_MALE = 1;
+    ENUM_RTF_TEMPLATE_TYPE_NICKNAME_FEMALE = 2;
+    ENUM_RTF_TEMPLATE_TYPE_COOLDOWN_TIME = 3;
+}
+
+message RichTextElement
+{
+    //类型为ENUM_RTF_ELEMENT_TYPE_NEW_LINE时,所有内容无效
+    optional RichTextElementType type = 1 [default = ENUM_RTF_ELEMENT_TYPE_TEXT];
+    //type为ENUM_COMBAT_TYPE_TEXT时有效
+    optional RichTextFormatTemplate text_template = 14;     //文本格式模版id
+    optional bytes text = 2;        //展示的文本
+    optional bool bold = 3;         //黑体
+    optional bool italic = 4;       //斜体
+    optional bool underline = 5;    //下划线
+    optional bool crossed = 6;      //删除线
+    optional int32 font = 7;        //字体(需要字体表)
+    optional int32 color = 8;       //颜色(RBG值)
+
+    //type为ENUM_COMBAT_TYPE_AVATAR时有效
+    optional int64 avatar_id = 9;
+    optional int64 width = 10;
+    optional int64 height = 11;
+
+    //type为ENUM_COMBAT_TYPE_ICON时有效
+    optional int64 icon_id = 12;
+
+    //链接
+    optional bytes link_address = 13;
+}
+
+enum RichTextAlignType
+{
+    ENUM_RTF_ALIGN_TYPE_LEFT  	= 0;
+    ENUM_RTF_ALIGN_TYPE_RIGHT   = 1;
+    ENUM_RTF_ALIGN_TYPE_CENTER  = 2;
+}
+
+enum RichTextBlockType
+{
+    ENUM_RTF_BLOCK_TYPE_BUY_VIP = 0;
+    ENUM_RTF_BLOCK_TYPE_INVITE_H5_FRIEND = 1;
+}
+
+message RichTextBlock
+{
+    repeated RichTextElement elements = 1;
+    optional RichTextAlignType align = 2;
+    optional RichTextBlockType type = 3 [default = ENUM_RTF_BLOCK_TYPE_BUY_VIP];
+}
+
+message RichTextMessage
+{
+    repeated RichTextBlock message = 1;
+}

@@ -1,0 +1,9 @@
+syntax = "proto2"; 
+option optimize_for=LITE_RUNTIME;
+import "MessageType.proto";  
+message GetDeg2FriendsCountRS
+{
+	optional MessageType.ErrorInfo err_info = 1;    // error code.
+	required uint64 user_id = 2; // 
+	required int32  count=3;//
+}

@@ -1,0 +1,5 @@
+syntax = "proto2";  
+message GetDeg2FriendsCountRQ
+{
+    required uint64 user_id =1; // 请求者ID
+}

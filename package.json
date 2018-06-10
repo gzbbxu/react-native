@@ -1,0 +1,29 @@
+{
+  "name": "MyReactNativeApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "glob": "~6.0.4",
+    "google-closure-compiler": "~20160619.0.0",
+    "google-closure-library": "~20160125.0.0",
+    "google-protobuf": "^3.4.0",
+    "gulp": "~3.9.0",
+    "jasmine": "~2.4.1",
+    "lottie-react-native": "^2.2.7",
+    "protobufjs": "^5.0.2",
+    "pubsub-js": "^1.5.7",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.48.4",
+    "react-native-animatable": "^1.2.4",
+    "react-native-animation": "^1.0.7",
+    "react-native-bounceable": "^0.2.1",
+    "react-native-code-push": "^5.1.3-beta",
+    "react-native-deprecated-custom-components": "^0.1.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  }
+}
